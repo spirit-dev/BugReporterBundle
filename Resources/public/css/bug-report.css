@@ -1,0 +1,27 @@
+.bug-reporter .accordion-navigation > a {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+}
+
+#panelBugReport {
+    border-bottom: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+}
+
+#panelBugReport form fieldset {
+    margin: 0;
+}
+
+.small-input {
+    height: 1.6125rem !important;
+    font-size: 0.8rem !important;
+    line-height: 1.6125rem;
+    padding: 0;
+    width: 100%;
+}
+
+#report-removal {
+    padding: 0.5rem 1rem 0.5rem 0.875rem;
+    font-size: 0.8rem;
+}
