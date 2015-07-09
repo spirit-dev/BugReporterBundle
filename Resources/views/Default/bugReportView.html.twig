@@ -1,23 +1,5 @@
 {% if(app.environment == "dev") %}
 
-    {% block moreStylesheets %}
-        {% stylesheets
-        'bundles/mainbugreport/css/bug-report.css'
-        filter='cssrewrite, ?yui_css' %}
-        <link rel="stylesheet" href="{{ asset_url }}"/>
-        {% endstylesheets %}
-        {#<link href="{{ asset('bundles/mainbugreport/css/bug-report.css') }}">#}
-    {% endblock %}
-    {% block moreJavascripts %}
-
-        {#<script type="application/javascript" src="{{ asset('bundles/spiritdevbugreporter/js/bug-report.js') }}"></script>#}
-        {% javascripts
-        '@SpiritDevBugReporterBundle/Resources/public/js/bug-report.js'
-        filter='?yui_js' %}
-        <script type="text/javascript" src="{{ asset_url }}" async defer></script>
-        {% endjavascripts %}
-    {% endblock %}
-
     <footer class="ci_informations">
         <div class="row">
             <div class="small-12 columns">
@@ -123,4 +105,22 @@
             </div>
         </div>
     </footer>
+
+    {% block moreStylesheets %}
+        {% stylesheets
+        'bundles/spiritdevbugreporter/css/bug-report.css'
+        filter='cssrewrite, ?yui_css' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+        {#<link href="{{ asset('bundles/mainbugreport/css/bug-report.css') }}">#}
+    {% endblock %}
+    {% block moreJavascripts %}
+
+        {#<script type="application/javascript" src="{{ asset('bundles/spiritdevbugreporter/js/bug-report.js') }}" async defer></script>#}
+        {% javascripts
+        '@SpiritDevBugReporterBundle/Resources/public/js/bug-report.js'
+        filter='?yui_js' %}
+        <script type="text/javascript" src="{{ asset_url }}" async defer></script>
+        {% endjavascripts %}
+    {% endblock %}
 {% endif %}
