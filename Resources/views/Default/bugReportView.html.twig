@@ -1,4 +1,23 @@
 {% if(app.environment == "dev") %}
+
+    {% block moreStylesheets %}
+        {% stylesheets
+        'bundles/mainbugreport/css/bug-report.css'
+        filter='cssrewrite, ?yui_css' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+        {#<link href="{{ asset('bundles/mainbugreport/css/bug-report.css') }}">#}
+    {% endblock %}
+    {% block moreJavascripts %}
+
+        {#<script type="application/javascript" src="{{ asset('bundles/spiritdevbugreporter/js/bug-report.js') }}"></script>#}
+        {% javascripts
+        '@SpiritDevBugReporterBundle/Resources/public/js/bug-report.js'
+        filter='?yui_js' %}
+        <script type="text/javascript" src="{{ asset_url }}" async defer></script>
+        {% endjavascripts %}
+    {% endblock %}
+
     <footer class="ci_informations">
         <div class="row">
             <div class="small-12 columns">
@@ -13,7 +32,7 @@
                         </fieldset>
                     </div>
                     <div class="small-3 columns">
-                        <fieldset>
+                        <fieldset> 
                             <legend>Product legals</legend>
                             <ul>
                                 <li>Company : <b>{{ assembly_company }}</b></li>
@@ -48,7 +67,7 @@
 
                             <div id="report-issue"></div>
 
-                            <form id="bug-report-form" action="{{ path('bug_report') }}" method="post" data-abide>
+                            <form id="bug-report-form" action="{{ path('spirit_dev_bug_reporter_bug_report') }}" method="post" data-abide>
                                 <fieldset>
                                     <legend>Report a bug</legend>
 

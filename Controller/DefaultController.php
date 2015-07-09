@@ -2,6 +2,7 @@
 
 namespace SpiritDev\Bundle\BugReporterBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -15,16 +16,36 @@ use SpiritDev\Bundle\BugReporterBundle\Form\BugReportType;
 
 class DefaultController extends Controller
 {
+
     /**
-     * @Route("/bug_report", name="bug_report")
+     * @Route("/bug_report_view", name="spirit_dev_bug_reporter_view")
+     * @Template()
+     */
+    public function bugReportViewAction() {
+        return array(
+            'ci_version' => $this->container->getParameter('ci_version'),
+            'assembly_guid' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.guid'),
+            'assembly_product' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.product'),
+            'assembly_title' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.title'),
+            'assembly_description' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.description'),
+            'assembly_culture' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.culture'),
+            'assembly_configuration' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.configuration'),
+            'assembly_company' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.company'),
+            'assembly_copyright' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.copyright'),
+            'assembly_trademark' => $this->container->getParameter('spirit_dev_bug_reporter.assembly.trademark'),
+        );
+    }
+
+    /**
+     * @Route("/bug_report", name="spirit_dev_bug_reporter_bug_report")
      */
     public function bugReportAction(Request $request) {
         // Create new contact entity
         $bugReport = new BugReport();
         // Override fixed informations
-        $bugReport->setProjecId($this->container->getParameter('odoo_project_ref_id'));
-        $bugReport->setPartnerId($this->container->getParameter('odoo_partner_ref_id'));
-        $bugReport->setContactMail($this->container->getParameter('odoo_contact_mail'));
+        $bugReport->setProjecId($this->container->getParameter('spirit_dev_bug_reporter.odoo_middleware.project_ref_id'));
+        $bugReport->setPartnerId($this->container->getParameter('spirit_dev_bug_reporter.odoo_middleware.partner_ref_id'));
+        $bugReport->setContactMail($this->container->getParameter('spirit_dev_bug_reporter.odoo_middleware.contact_mail'));
 
         $bugReport->setMessageObject($request->get('message_object'));
         $bugReport->setPriority($request->get('priority'));
@@ -108,7 +129,7 @@ class DefaultController extends Controller
         // Setting hraders
         $headers = ['Content-Type' => 'application/json'];
         // Setting Odoo Middleware urls
-        $request = $browser->post($this->container->getParameter('odoo_middleware_url')."/newIssue", $headers, $jsonPayload);
+        $request = $browser->post($this->container->getParameter('spirit_dev_bug_reporter.odoo_middleware.url')."/newIssue", $headers, $jsonPayload);
         // Getting request reulst
         $response = json_decode($request->getContent(), true);
         return ($response);
