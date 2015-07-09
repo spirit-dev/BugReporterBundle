@@ -1,0 +1,107 @@
+{% if(app.environment == "dev") %}
+    <footer class="ci_informations">
+        <div class="row">
+            <div class="small-12 columns">
+                <div class="row">
+                    <div class="small-4 columns">
+                        <fieldset>
+                            <legend>Product version</legend>
+                            <ul>
+                                <li>CI Release : <b>{{ ci_version }}</b></li>
+                                <li>Product GUID : <b>{{ assembly_guid }}</b></li>
+                            </ul>
+                        </fieldset>
+                    </div>
+                    <div class="small-3 columns">
+                        <fieldset>
+                            <legend>Product legals</legend>
+                            <ul>
+                                <li>Company : <b>{{ assembly_company }}</b></li>
+                                <li>Copyright : <b>{{ assembly_copyright }}</b></li>
+                                <li>Trademark : <b>{{ assembly_trademark }}</b></li>
+                            </ul>
+                        </fieldset>
+                    </div>
+                    <div class="small-5 columns">
+                        <fieldset>
+                            <legend>Product info's</legend>
+                            <ul>
+                                <li>Title : <b>{{ assembly_title }}</b></li>
+                                <li>Description : <b>{{ assembly_description }}</b></li>
+                                <li>Culture : <b>{{ assembly_culture }}</b></li>
+                                <li>Configuration : <b>{{ assembly_configuration }}</b></li>
+                            </ul>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <ul class="accordion bug-reporter" data-accordion role="tablist">
+                    <li class="accordion-navigation">
+                        <a href="#panelBugReport" role="tab" id="panelBugReport-heading" aria-controls="panelBugReport">Report
+                            a bug ? click here !</a>
+
+                        <div id="panelBugReport" class="content" role="tabpanel"
+                             aria-labelledby="panelBugReport-heading">
+
+                            <div id="report-issue"></div>
+
+                            <form id="bug-report-form" action="{{ path('bug_report') }}" method="post" data-abide>
+                                <fieldset>
+                                    <legend>Report a bug</legend>
+
+                                    <div class="row">
+                                        <div class="small-5 columns">
+                                            <div class="row collapse">
+                                                <div class="small-3 columns">
+                                                    <span class="prefix small-input">Bug title</span>
+                                                </div>
+                                                <div class="small-9 columns">
+                                                    <input class="small-input" name="message_object" type="text"
+                                                           placeholder="Give a title to this bug." tabindex=1 required>
+                                                    <small class="error">You have to give a title to the bug.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="small-5 columns">
+                                            <div class="row collapse">
+                                                <div class="small-3 columns">
+                                                    <span class="prefix small-input">Bug priority</span>
+                                                </div>
+                                                <div class="small-9 columns">
+                                                    <select class="small-input" name="priority" tabindex=3>
+                                                        <option value="0">Basse</option>
+                                                        <option value="1">Normale</option>
+                                                        <option value="3">Importante</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="small-2 columns">
+                                            <input class="button warning small-input" type="submit" value="Report bug"
+                                                   tabindex=4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="small-12 columns">
+
+                                            <textarea class="small-input" name="message_content"
+                                                      placeholder="Give precisions to this bug." tabindex=2
+                                                      required></textarea>
+                                            <small class="error">You have to describe the bug.</small>
+
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+{% endif %}
