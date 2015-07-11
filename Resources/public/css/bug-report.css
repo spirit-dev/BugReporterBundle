@@ -1,3 +1,17 @@
+.ci_informations, .ci_informations ul li {
+    font-size: 10px;
+    list-style: none;
+    margin-left: -20px;
+}
+.ci_informations ul {
+    margin-bottom: -0.75rem;
+    min-height: 65px;
+}
+.ci_informations .columns {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
 .bug-reporter .accordion-navigation > a {
     padding: 0.5rem;
     font-size: 0.8rem;
